@@ -1,7 +1,7 @@
 ---
 - name: Setup Microshift Host
   hosts: edgenodes
-  remote_user: ec2-user
+  remote_user: CHANGEME
   become: yes
 
   tasks:
@@ -50,6 +50,10 @@
       name: microshift
       enabled: yes
       state: started
+
+  - name: Wait for Microshift to Start
+    wait_for:
+      path: /var/lib/microshift/resources/kubeadmin/kubeconfig
 
   - name: Setup kubedir
     command: mkdir /root/.kube
