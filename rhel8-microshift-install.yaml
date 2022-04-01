@@ -1,0 +1,58 @@
+---
+- name: Setup Microshift Host
+  hosts: edgenodes
+  remote_user: ec2-user
+  become: yes
+
+  tasks:
+  - name: Enable RHSM Manage (FOR AWS EC2 INSTANCES)
+    command: subscription-manager config --rhsm.manage_repos=1
+
+  - name: Configure subscription-manager
+    redhat_subscription:
+            state: present
+            username: CHANGEME
+            password: CHANGEME
+            pool_ids: CHANGEME
+
+  - name: Enable RHEL 8 BaseOS Repos
+    rhsm_repository:
+            name: rhel-8-for-x86_64-baseos-rpms
+
+  - name: Enable RHEL 8 AppStream Repos
+    rhsm_repository:
+            name: rhel-8-for-x86_64-appstream-rpms
+
+  - name: Enable OCP 4.10 Repos
+    rhsm_repository:
+            name: rhocp-4.10-for-rhel-8-x86_64-rpms
+
+  - name: Enable Red Hat ET COPR Repo
+    command: dnf copr enable -y @redhat-et/microshift
+
+  - name: Install Packages
+    yum:
+      name:
+        - cri-o
+        - cri-tools
+        - podman
+        - openshift-clients
+        - microshift
+      
+  - name: Enable and Start CRI-O 
+    systemd:
+      name: crio
+      enabled: yes
+      state: started
+
+  - name: Enable and Start Microshift
+    systemd:
+      name: microshift
+      enabled: yes
+      state: started
+
+  - name: Setup kubedir
+    command: mkdir /root/.kube
+  - name: Copy KUBECONFIG
+    command: cp /var/lib/microshift/resources/kubeadmin/kubeconfig /root/.kube/config
+
