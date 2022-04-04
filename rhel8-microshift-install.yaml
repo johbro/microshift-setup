@@ -30,6 +30,11 @@
   - name: Enable Red Hat ET COPR Repo
     command: dnf copr enable -y @redhat-et/microshift
 
+  - name: Upgrade all packages
+    yum:
+      name: '*'
+      state: latest
+
   - name: Install Packages
     yum:
       name:
@@ -60,3 +65,6 @@
   - name: Copy KUBECONFIG
     command: cp /var/lib/microshift/resources/kubeadmin/kubeconfig /root/.kube/config
 
+  - name: Reboot node
+    reboot:
+      reboot_timeout: 200
