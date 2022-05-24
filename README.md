@@ -6,7 +6,6 @@ Tooling and Automation to assist in the provisioning of the microshift project
 To run MicroShift, you need a machine with at least:
 
 - a supported 64-bit2 CPU architecture (amd64/x86_64, arm64, or riscv64)
-- a supported OS (see below)
 - 2 CPU cores
 - 2GB of RAM
 - 1GB of free storage space for MicroShift
