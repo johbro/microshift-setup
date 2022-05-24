@@ -7,6 +7,11 @@ Tooling and Automation to assist in the provisioning of the microshift project
 - Replace CHANGEME in playbook - remote-user, RH Subscription Credentials, and PoolID to
 - Run Playbook
 
+## Replace CHANGEME in rhel8-microshift-install.yaml playbook 
+- remote-user 
+- RH Subscription Credentials
+- PoolID
+
 ## Update inventory File
 
 ## Run Ansible playbook
