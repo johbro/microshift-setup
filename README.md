@@ -17,26 +17,26 @@ To run MicroShift, you need a machine with at least:
 - Replace CHANGEME in playbook - remote-user, RH Subscription Credentials, and PoolID to
 - Run Playbook
 
-## Replace CHANGEME in rhel8-microshift-install.yaml playbook 
+### Replace CHANGEME in rhel8-microshift-install.yaml playbook 
 - remote-user 
 - RH Subscription Credentials
 - PoolID
 
-## Update inventory File
+### Update inventory File
 
-## Run Ansible playbook
+### Run Ansible playbook
 ```
 ansible-playbook -i inventory rhel8-microshift-install.yaml
 ```
-## Wait for restart 
+### Wait for restart 
 
-## Copy Kubeconfig 
+### Copy Kubeconfig 
 ```
 mkdir ~/.kube
 sudo cat /var/lib/microshift/resources/kubeadmin/kubeconfig > ~/.kube/config
 ```
 
-## View Pods 
+### View Pods 
 ```
 oc get pods -A
 ```
